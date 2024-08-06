@@ -94,20 +94,74 @@
      ```
      Create a `requirements.txt` file with the following content:
      ```plaintext
-     Flask==2.0.1
+     Flask==1.1.2
+     Werkzeug==1.0.1
+     Jinja2==2.11.3
+     MarkupSafe==1.1.1
+     itsdangerous==1.1.0
      ```
 
 2. **Create a Dockerfile**
-   - **Task**: Create a `Dockerfile` for the web application as described in the previous assignment.  
+   - **Task**: Create a `Dockerfile` for the web application as described in the previous assignment.
+   - **Solution**:
+     Create a file named `Dockerfile` in the `my-web-app` directory with the following content:
+     ```dockerfile
+     # Use the official lightweight Python image from the Docker Hub
+     FROM python:3.9-slim
+
+     # Set the working directory in the container
+     WORKDIR /app
+
+     # Install gcc and other necessary dependencies
+     RUN apt-get update && apt-get install -y --no-install-recommends \
+         gcc \
+         && rm -rf /var/lib/apt/lists/*
+
+     # Copy the requirements file into the container
+     COPY requirements.txt .
+
+     # Install the required packages
+     RUN pip install --no-cache-dir -r requirements.txt
+
+     # Copy the rest of the application code into the container
+     COPY . .
+
+     # Expose port 5000 for the Flask app
+     EXPOSE 5000
+
+     # Run app.py when the container launches
+     CMD ["python", "app.py"]
+     ```  
 
 3. **Build a Docker Image**
    - **Task**: Build a Docker image for your web application.
+   - **Command**:
+     ```sh
+     docker build -t my-web-app .
+     ```
+   - **Solution Explanation**: This command builds a Docker image named `my-web-app` from the `Dockerfile` in the current directory (`.`).
 
 4. **Tag a Docker Image**
    - **Task**: Tag your image with a specific version (e.g., `my-web-app:v1.0`).
+   - **Command**:
+     ```sh
+     docker tag my-web-app my-web-app:v1.0
+     ```
+   - **Solution Explanation**: This command tags the `my-web-app` image with the version `v1.0`.
 
 5. **Run a Docker Container from Custom Image**
    - **Task**: Run a container from your custom image and map the necessary ports.
+   - **Command**:
+     ```sh
+     docker run -d -p 5000:5000 my-web-app
+     ```
+   - **Solution Explanation**: This command runs the `my-web-app` container in detached mode (`-d`) and maps port 5000 of the container to port 5000 on the host machine (`-p 5000:5000`).
 
 6. **Push the Image to Docker Hub**
    - **Task**: Push your tagged image to Docker Hub (requires a Docker Hub account).
+   - **Command**:
+     ```sh
+     docker tag my-web-app:v1.0 <your_dockerhub_username>/my-web-app:v1.0
+     docker push <your_dockerhub_username>/my-web-app:v1.0
+     ```
+   - **Solution Explanation**: Replace `<your_dockerhub_username>` with your Docker Hub username. The first command tags the image for Docker Hub, and the second command pushes the image to your Docker Hub repository.
