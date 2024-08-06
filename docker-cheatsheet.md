@@ -9,7 +9,7 @@ docker help
 
 ## Container Management
 
-# Run a Docker Container in Detach Mode
+**Run a Docker Container in Detach Mode**
 ```sh
 docker run -d --name my_container nginx
 ```
