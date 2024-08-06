@@ -73,3 +73,41 @@
      docker rmi nginx
      ```
    - **Solution Explanation**: This command removes the `nginx` image from your local machine.
+
+### Part 2: Building and Managing Custom Images
+
+1. **Create a Simple Web Application**
+   - **Task**: Create a directory for your project and a simple web application as described in the previous assignment.
+   - **Solution**:
+     Create a directory named `my-web-app` and navigate into it. Inside this directory, create a file named `app.py` with the following content:
+     ```python
+     from flask import Flask
+
+     app = Flask(__name__)
+
+     @app.route('/')
+     def hello_world():
+         return 'Hello, Docker!'
+
+     if __name__ == '__main__':
+         app.run(host='0.0.0.0', port=5000)
+     ```
+     Create a `requirements.txt` file with the following content:
+     ```plaintext
+     Flask==2.0.1
+     ```
+
+2. **Create a Dockerfile**
+   - **Task**: Create a `Dockerfile` for the web application as described in the previous assignment.  
+
+3. **Build a Docker Image**
+   - **Task**: Build a Docker image for your web application.
+
+4. **Tag a Docker Image**
+   - **Task**: Tag your image with a specific version (e.g., `my-web-app:v1.0`).
+
+5. **Run a Docker Container from Custom Image**
+   - **Task**: Run a container from your custom image and map the necessary ports.
+
+6. **Push the Image to Docker Hub**
+   - **Task**: Push your tagged image to Docker Hub (requires a Docker Hub account).
