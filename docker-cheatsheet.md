@@ -1,4 +1,4 @@
-### General Commands
+## General Commands
 
 ```sh
 docker --version
@@ -7,7 +7,7 @@ docker version
 docker help
 ```
 
-### Container Management
+## Container Management
 
 ## Run a Docker Container in Detach Mode
 ```sh
@@ -82,7 +82,7 @@ docker container prune
 docker rm -f $(docker ps -a -q)
 ```
 
-### Image Management
+## Image Management
 
 ## Downloads a Docker image from a Docker registry (usually Docker Hub).
 ```sh
